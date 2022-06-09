@@ -1,6 +1,6 @@
 from flask.json import jsonify
 from src.constants.http_status_codes import HTTP_404_NOT_FOUND, HTTP_500_INTERNAL_SERVER_ERROR
-from flask import Flask, config, redirect
+from flask import Flask, config, redirect, render_template
 import os
 
 
@@ -24,6 +24,10 @@ def create_app(test_config=None):
     @app.get("/hello")
     def say_hello():
         return jsonify({"message": "Hello World"})
+
+    @app.route("/hw")
+    def template_test():
+        return render_template('hello.html', my_string="Hello World !", my_list=[0,1,2,3,4,5])
 
 
     return app
