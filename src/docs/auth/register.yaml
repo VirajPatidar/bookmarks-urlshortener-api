@@ -4,7 +4,7 @@ tags:
   - Authentication
 parameters:
   - name: body
-    description: The body should contain the user Registration data
+    description: The body should contain the user registration data
     in: body
     required: true
     schema:

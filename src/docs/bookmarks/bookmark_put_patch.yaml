@@ -1,0 +1,44 @@
+Update an existing bookmark by ID
+---
+tags:
+  - Bookmarks
+
+parameters:
+  - name: id
+    in: path
+    required: true
+    schema:
+      type: integer
+      minimum: 1
+    description: The bookmark ID
+  - name: body
+    in: body
+    description: The body should contain the bookmark details
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "url"
+        - "body"
+      properties:
+        url:
+          type: "url"
+          example: "https://www.example.com"
+        body:
+          type: "string"
+          example: "This is the updated bookmark body"
+
+
+security:
+  - Bearer: []
+
+responses:
+  200:
+    description: Updates bookmark successfully
+  400:
+    description: Invalid data provided
+  401:
+    description: Fails to get item due to authentication error
+  404:
+    description: Bookmark not found

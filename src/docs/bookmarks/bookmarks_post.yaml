@@ -1,0 +1,37 @@
+Create a new bookmark
+---
+tags:
+  - Bookmarks
+
+parameters:
+  - name: body
+    description: The body should contain the bookmark details
+    in: body
+    required: true
+    schema:
+      type: object
+      required:
+        - "url"
+        - "body"
+      properties:
+        url:
+          type: "url"
+          example: "https://www.example.com"
+        body:
+          type: "string"
+          example: "This is my website"
+
+security:
+  - Bearer: []
+  
+responses:
+  201:
+    description: Bookmark created
+
+  400:
+    description: User supplies incorrect credentials
+
+  409:
+    description: URL already exists
+    
+  

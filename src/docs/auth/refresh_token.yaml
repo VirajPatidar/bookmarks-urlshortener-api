@@ -1,0 +1,15 @@
+Refresh your access token. Please add "Bearer" before the token
+---
+tags:
+  - Authentication
+parameters:
+  - in: header
+    name: Authorization
+    required: true
+
+responses:
+  200:
+    description: Creates a new access token successfully
+
+  400:
+    description: Fails to login due to bad request data
