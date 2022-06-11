@@ -78,8 +78,14 @@ def login():
 
 
 @auth.get("/me")
+@jwt_required()
 def me():
+    user_id = get_jwt_identity()
+    user = User.query.filter_by(id=user_id).first()
     return jsonify({
-        'username': 'user.username',
-        'email': 'user.email'
+        'username': user.username,
+        'email': user.email
     }), HTTP_200_OK
+
+
+
