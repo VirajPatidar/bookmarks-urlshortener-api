@@ -6,6 +6,8 @@ from src.auth import auth
 from src.bookmarks import bookmarks
 from src.database import db, Bookmark
 from flask_jwt_extended import JWTManager
+from flasgger import Swagger, swag_from
+from src.config.swagger import template, swagger_config
 
 
 def create_app(test_config=None):
@@ -18,6 +20,11 @@ def create_app(test_config=None):
             SQLALCHEMY_DATABASE_URI=os.environ.get("SQLALCHEMY_DB_URI"),
             SQLALCHEMY_TRACK_MODIFICATIONS=False,
             JWT_SECRET_KEY=os.environ.get('JWT_SECRET_KEY'),
+
+            SWAGGER={
+                'title': "Bookmarks API + URL Shortner",
+                'uiversion': 3
+            }
         )
 
     else:
@@ -32,21 +39,24 @@ def create_app(test_config=None):
     app.register_blueprint(auth)
     app.register_blueprint(bookmarks)
 
+    Swagger(app, config=swagger_config, template=template)
 
-    @app.get("/")
+
+    @app.get("/hello")
     def index():
         return "Hello World"
 
-    @app.get("/hello")
+    @app.get("/hello2")
     def say_hello():
         return jsonify({"message": "Hello World"})
 
-    @app.route("/hw")
+    @app.route("/hello3")
     def template_test():
         return render_template('hello.html', my_string="Hello World !", my_list=[0,1,2,3,4,5])
 
     
     @app.get('/<short_url>')
+    @swag_from('./docs/short_url.yaml')
     def redirect_to_url(short_url):
         bookmark = Bookmark.query.filter_by(short_url=short_url).first_or_404()
 

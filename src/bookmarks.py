@@ -4,12 +4,15 @@ from flask.json import jsonify
 import validators
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from src.database import Bookmark, db
+from flasgger import swag_from
 
 bookmarks = Blueprint("bookmarks", __name__, url_prefix="/api/v1/bookmarks")
 
 
 @bookmarks.route('/', methods=['POST', 'GET'])
 @jwt_required()
+@swag_from('./docs/bookmarks/bookmarks_get.yaml', methods=['GET'])
+@swag_from('./docs/bookmarks/bookmarks_post.yaml', methods=['POST'])
 def handle_bookmarks():
     current_user = get_jwt_identity()
 
@@ -79,6 +82,7 @@ def handle_bookmarks():
 
 @bookmarks.get("/<int:id>")
 @jwt_required()
+@swag_from('./docs/bookmarks/bookmark_get.yaml', methods=['GET'])
 def get_bookmark(id):
     current_user = get_jwt_identity()
 
@@ -102,6 +106,7 @@ def get_bookmark(id):
 @bookmarks.put('/<int:id>')
 @bookmarks.patch('/<int:id>')
 @jwt_required()
+@swag_from('./docs/bookmarks/bookmark_put_patch.yaml', methods=['PUT', 'PATCH'])
 def editbookmark(id):
     current_user = get_jwt_identity()
 
@@ -137,6 +142,7 @@ def editbookmark(id):
 
 @bookmarks.delete("/<int:id>")
 @jwt_required()
+@swag_from('./docs/bookmarks/bookmark_del.yaml', methods=['DELETE'])
 def delete_bookmark(id):
     current_user = get_jwt_identity()
 
@@ -154,6 +160,7 @@ def delete_bookmark(id):
 
 @bookmarks.get("/stats")
 @jwt_required()
+@swag_from("./docs/bookmarks/stats.yaml")
 def get_stats():
     current_user = get_jwt_identity()
 
