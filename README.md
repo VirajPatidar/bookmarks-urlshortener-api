@@ -5,8 +5,6 @@ _An [API](https://bookmarks-urlshortner-api.herokuapp.com) to create and manage 
 
 **Link to the API docs:** [https://bookmarks-urlshortner-api.herokuapp.com](https://bookmarks-urlshortner-api.herokuapp.com) <br/>
 
-<br/>
-
 
 ### Tech Stack ###
   * Flask
@@ -30,7 +28,7 @@ _An [API](https://bookmarks-urlshortner-api.herokuapp.com) to create and manage 
 
 <br/>
 
-**Authentication**
+**Bookmarks + URL Shortener**
 | Method | API Endpoint | Description |
 | :---         | :---         | :---
 | `POST`     | `/bookmarks`       |  To create a new bookmark      |
@@ -43,3 +41,51 @@ _An [API](https://bookmarks-urlshortner-api.herokuapp.com) to create and manage 
 | `GET`     | `/{short_url}`       |  Redirects to original URL using short_url  |
 
 <br/>
+
+
+### Setup ###
+Create project with virtual environment
+
+```console
+$ mkdir myproject
+$ cd myproject
+$ python3 -m venv venv
+```
+
+Activate it
+```console
+$ . venv/bin/activate
+```
+
+or on Windows
+```console
+venv\Scripts\activate
+```
+
+Install Dependencies
+```console
+$ pip install -r requirements.txt
+```
+
+Set environment variables in terminal
+```console
+$ export FLASK_APP=src
+$ export FLASK_ENV=development
+$ export SQLALCHEMY_DB_URI=sqlite:///bookmarks.db
+$ export SECRET_KEY="your secret key"
+$ export JWT_SECRET_KEY="your JWT secret key"
+```
+
+or on Windows
+```console
+$ set FLASK_APP=src
+$ set FLASK_ENV=development
+$ set SQLALCHEMY_DB_URI=sqlite:///bookmarks.db
+$ set SECRET_KEY="your secret key"
+$ set JWT_SECRET_KEY="your JWT secret key"
+```
+
+Run the app
+```console
+$ flask run
+```
