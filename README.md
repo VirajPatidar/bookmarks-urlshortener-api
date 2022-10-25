@@ -3,7 +3,7 @@
 _An [API](https://bookmarks-urlshortner-api.herokuapp.com) to create and manage bookmarks with a URL shortening service <br/>_
 
 
-**Link to the API docs:** [https://bookmarks-urlshortner-api.herokuapp.com](https://bookmarks-urlshortner-api.herokuapp.com) <br/>
+**Link to the API docs:** [https://bookmarks-urlshortener-api.up.railway.app/](https://bookmarks-urlshortener-api.up.railway.app/) <br/>
 
 
 ### Tech Stack ###
